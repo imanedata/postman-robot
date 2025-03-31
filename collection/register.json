@@ -48,7 +48,7 @@
 							"    pm.expect(pm.response.json().data.last_name).to.eql(expectedLastName);",
 							"});",
 							"pm.test(\"Test de avatar\", function () {",
-							"    let expectedLastName = pm.iterationData.get(\"last_name\");",
+							"    let expectedAavatar = pm.iterationData.get(\"avatar\");",
 							"    pm.expect(pm.response.json().data.avatar).to.eql(expectedAavatar);",
 							"});"
 						],
