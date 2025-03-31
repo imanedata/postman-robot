@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+import os
 
 class Dataprep:
     full_data = [
@@ -50,12 +51,20 @@ class Dataprep:
     def __init__(self, path):
         self.path = path
     
-    def CreatData(self):
-        data = pd.DataFrame(Dataprep.full_data).sample(frac=0.5, random_state=random.randint(1, 100))
+    def CreatData(self, frac=0.5):
+        # Si le fichier existe déjà, on peut choisir d'ignorer l'écriture ou de l'écraser
+        if os.path.exists(self.path):
+            print(f"Le fichier {self.path} existe déjà. Il va être écrasé.")
+        else:
+            print(f"Création du fichier {self.path}.")
+
+        data = pd.DataFrame(Dataprep.full_data).sample(frac=frac, random_state=random.randint(1, 100))
+        
+
         data.to_csv(self.path, index=False) 
         
-    
-        
+        print(f"Les données ont été sauvegardées dans {self.path}")
+
 if __name__ == "__main__":
-    data_prep = Dataprep("data/data.csv")  # Provide the filename
-    data_prep.CreatData()
+    data_prep = Dataprep("data/data.csv")  
+    data_prep.CreatData(frac=1)  
